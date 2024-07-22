@@ -1,0 +1,7 @@
+cradle:
+  cabal:
+    - path: "src"
+      component: "lib:digestive-functors-aeson"
+
+    - path: "test"
+      component: "digestive-functors-aeson:test:tests"

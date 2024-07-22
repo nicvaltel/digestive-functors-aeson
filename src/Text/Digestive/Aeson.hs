@@ -12,7 +12,6 @@ import Control.Monad (join)
 import Data.Aeson (ToJSON(toJSON), Value(..), object)
 import Data.Aeson.Lens
 import Data.Maybe (fromMaybe)
-import Data.Monoid (mempty)
 import Safe (readMay)
 import Text.Digestive
 import Text.Digestive.Form.List (unparseIndices)
@@ -20,6 +19,7 @@ import Text.Digestive.Form.List (unparseIndices)
 import qualified Data.IntMap.Strict as IntMap
 import qualified Data.Text as T
 import qualified Data.Vector as V
+import Unsafe.Coerce(unsafeCoerce)
 
 --------------------------------------------------------------------------------
 {-| Given a JSON document and a form, attempt to use the JSON document to
@@ -85,7 +85,7 @@ jsonErrors v =
 pathToLens :: [T.Text] -> Traversal' (Maybe Value) (Maybe Value)
 pathToLens = foldl (.) id . map pathElem . filter (not . T.null)
   where
-    pathElem p = maybe (non (object []) . _Object . at p)
+    pathElem p = maybe (non (object []) . _Object . at (unsafeCoerce p))
                        (\n -> non (Array mempty) . _Array . iso toMap fromMap . at n)
                        (readMay $ T.unpack p)
     toMap = V.ifoldl' (\m i a -> IntMap.insert i a m) IntMap.empty

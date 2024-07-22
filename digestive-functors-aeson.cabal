@@ -4,7 +4,7 @@ version: 1.1.28
 license: GPL-3
 license-file: LICENSE
 author: Oliver Charles
-maintainer: Oliver Charles <ollie@ocharles.org.uk>
+maintainer: <nicvaltel@gmail.com>
 build-type: Simple
 cabal-version: >=1.8
 homepage: http://github.com/ocharles/digestive-functors-aeson
@@ -31,8 +31,8 @@ library
     base >= 4.5 && < 5,
     containers >= 0.5,
     digestive-functors >= 0.7 && < 0.9,
-    lens >= 4.4 && <= 5.0.1,
-    lens-aeson >= 1 && <= 1.1.3,
+    lens >= 4.4 && <= 5.4,
+    lens-aeson >= 1 && <= 1.3,
     safe >= 0.3.3,
     text >= 0.11,
     vector >= 0.10
